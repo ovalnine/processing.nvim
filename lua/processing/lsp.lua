@@ -23,26 +23,24 @@ function M.setup(config)
   )
 
   -- Define the processing LSP server if it's not already defined
-  if not lspconfig.processing then
-    require('lspconfig.configs').processing = {
-      default_config = {
-        cmd = vim.list_extend({ config.processing_path, "lsp" }, config.lsp_args),
-        filetypes = config.filetypes,
-        root_dir = function(fname)
-          return lspconfig.util.find_git_ancestor(fname) or vim.fn.getcwd()
-        end,
-        settings = config.settings,
-        capabilities = config.capabilities,
-      },
-      docs = {
-        description = [[
-          Language Server for Processing Framework
-          https://processing.org/
-          This LSP server requires the Processing binary to be installed and available in your PATH.
-        ]],
-      },
-    }
-  end
+  require('lspconfig.configs').processing = {
+    default_config = {
+      cmd = vim.list_extend({ config.processing_path, "lsp" }, config.lsp_args),
+      filetypes = config.filetypes,
+      root_dir = function(fname)
+        return lspconfig.util.find_git_ancestor(fname) or vim.fn.getcwd()
+      end,
+      settings = config.settings,
+      capabilities = config.capabilities,
+    },
+    docs = {
+      description = [[
+        Language Server for Processing Framework
+        https://processing.org/
+        This LSP server requires the Processing binary to be installed and available in your PATH.
+      ]],
+    },
+  }
 
   -- Setup the LSP server
   lspconfig.processing.setup({
