@@ -64,10 +64,10 @@ function M.setup(opts)
   end
 
   -- Setup the LSP server
-  require("processing.lsp").setup(M.config)
+  require("lsp").setup(M.config)
 
   -- Setup commands
-  require("processing.commands").setup(M.config)
+  require("commands").setup(M.config)
 end
 
 return M
